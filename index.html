@@ -1,0 +1,266 @@
+0<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>GNU/Linux Sesion2</title>
+
+		<meta name="description" content="Introduccion para newbies">
+		<meta name="author" content="Anthony Flores Gomez">
+
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Sesion 2</h1>
+					<ul>
+						<li>Gestión de Archivos</li>
+						<li>Gestión de Usuarios y Grupos</li>
+					</ul>
+					<p>Grupo de estudio Nucleo GNU/Linux</p>
+					<p>
+						<small>Por <a href="https://www.facebook.com/anthony.floresgomez.54">Anthony Flores</a> / <a href="http://telegram.com"> telegram : @antoine9 </a></small>
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h1>Gestion de archivos</h1>
+					</section>
+					
+					<section>
+						<h1>En la clase anterior...</h1>
+
+						<ul>
+							<li>
+								<b>mkdir</b><br>
+								Crea un directorios
+							</li>
+							<li>
+								<b>cp</b><br>
+								copia archivos o directorios
+							</li>
+							<li>
+								<b>mv</b><br>
+								mueve (o renombra) archivos o directorios</li>
+							<li>
+								<b>rm</b><br>
+								elimina un archivo.
+							</li>
+							<li>
+								<b>touch</b><br>
+								Crea archivos en blanco
+							</li
+						</ul>
+					</section>
+
+				</section>
+
+				<section>
+						<section><h1>Gestion de usuarios</h1></section>
+						<section>
+							<p align="justify">
+									Un usuario es cualquier persona que usa un ordenador. Los nombres de usuario describen los nombres que representan a dichos usuarios. Esos nombres pueden ser cualquiera. Lo único que importa es que el equipo tenga un nombre para cada cuenta, y es con este nombre a través del cual una persona adquiere los permisos para usar el sistema. No obstante, algunos servicios del sistema se ejecutan utilizando cuentas de usuario restringidas o privilegiadas.
+									
+									Cualquier persona puede tener más de una cuenta, con un nombre diferente para cada cuenta que cree. Además, hay algunos nombres reservados, que no pueden ser utilizados, como «root».
+							</p>
+						</section>
+						<section>
+
+							<pre>
+								<code class="hljs" data-trim contenteditable>
+								drwxrwx--- 1 root vboxsf 16384 Jan 29 11:02 sf_Shared
+								</code>
+							</pre>
+
+							<p align="justify">En este ejemplo, la carpeta sf_Shared es propiedad del usuario root y del grupo vboxsf . También es posible determinar los propietarios y los permisos de un archivo con la orden stat:</p>
+
+						</section>
+						<section>
+							<p>
+								Los permisos de acceso se muestran en tres grupos de caracteres, representando los permisos del usuario propietario, del grupo propietario, y de los otros, respectivamente. Por ejemplo, los caracteres <code class="hljs" data-trim contenteditable>-rw-r--r--</code>  indican que el usuario propietario del archivo tiene permisos de lectura y escritura, pero no de ejecución (rw-), mientras que los usuarios que pertenecen al grupo propietario y los demás usuarios solo tienen permiso de lectura (r-- y r--).
+							</p>
+						</section>
+						<section>
+							<p>Para visualizar una lista de los usuarios actualmente conectados al sistema, se puede usar la orden <b>who</b></p>
+							<br>
+
+							<p>Para agregar un nuevo usuario, utilice la orden useradd:</p>
+
+							<pre>
+								<code class="hljs" data-trim contenteditable>
+										# useradd -m -g [grupo_principal] -G [grupos_adicionales] -s [shell_de_ingreso] [nombre_de_usuario]
+								</code>
+							</pre>
+
+						</section>
+						<section>
+								<pre>
+										<code class="hljs" data-trim contenteditable>
+												# useradd -m -g [grupo_principal] -G [grupos_adicionales] -s [shell_de_ingreso] [nombre_de_usuario]
+										</code>
+									</pre>
+		
+									<ul>
+											<li>-m crea el directorio home del usuario con la ruta /home/[nombre de usuario]
+											<li>-g define el nombre o el número del grupo principal del inicio de sesión del usuario, el nombre del grupo debe existir</li>
+											<li>-G introduce una lista de grupos suplementarios de los que el usuario será miembro</li>
+											<li>-s define la ruta y el nombre de la shell predeterminada de inicio de sesión del usuario</li>
+									</ul>
+		
+									<pre>
+											<code class="hljs" data-trim contenteditable>
+													# useradd -m -g users -s /bin/bash archie
+											</code>
+										</pre>
+
+						</section>
+
+						<section>
+								<code class="hljs" data-trim contenteditable>
+										# passwd [nombredeusuario]								
+									</code>
+								<p> Para introducir el password del usuario</p>
+								<br>
+
+								
+								<code class="hljs" data-trim contenteditable>
+										# userdel -r [nombredeusuario]
+									</code>
+									<p>Para eliminar un usuario</p>
+									<br>
+
+								<code class="hljs" data-trim contenteditable>
+										$ cat /etc/passwd
+								</code>	
+							<p>Para listar los usuarios registrados</p>
+
+						</section>
+
+				</section>
+
+				<section>
+						<section>
+							<h1>Gestion de grupos</h1>
+							<ul>
+								<li>Los grupos solo pueden contener usuarios, nunca a otros grupos</li>
+								
+							</ul>
+						</section>
+
+						<section>
+								<code class="hljs" data-trim contenteditable>
+										$ groups [usuario]
+								</code>
+								<p>La orden groups muestra la pertenencia al grupo</p>
+								<br>
+
+								<code class="hljs" data-trim contenteditable>
+										$ cat /etc/group
+								</code>
+								<p>Puede listar todos los grupos presentes en el sistema, ejecutando</p>
+								<br>
+
+
+								<code class="hljs" data-trim contenteditable>
+										# groupadd [grupo]
+								</code>
+								<p>Puede crear un nuevo grupo con la orden</p>
+								<br>
+						</section>
+
+						<section>
+								<code class="hljs" data-trim contenteditable>
+										# gpasswd -a [usuario] [grupo]
+								</code>
+								<p>Puede agregar un usuario a un grupo con la orden </p>
+								<br>
+								
+								<code class="hljs" data-trim contenteditable>
+										# groupdel [grupo]
+								</code>
+								<p>Puede eliminar un grupo existente, ejecutando</p>
+								<br>
+								
+								<code class="hljs" data-trim contenteditable>
+										# gpasswd -d [usuario] [grupo]
+								</code>
+								<p>Puede eliminar un usuario de un grupo</p>
+								<br>
+						</section>
+
+					</section>
+				
+				<!--  -->
+
+				<section style="text-align: left;">
+					<h1>THE END</h1>
+					<p>
+
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
